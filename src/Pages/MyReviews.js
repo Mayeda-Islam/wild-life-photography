@@ -12,13 +12,62 @@ const MyReviews = () => {
   }, [user?.email]);
   return (
     <div className="container mx-auto">
-      <div className="grid gap-y-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+      <table className="table w-full">
+      <thead>
+        <tr>
+          <th>
+            <label>
+              <input type="checkbox" className="checkbox" />
+            </label>
+          </th>
+          <th>Name</th>
+          <th>Service</th>
+          <th>Review</th>
+          <th>Rating</th>
+        </tr>
+      </thead>
+      <tbody>
         {myReviews.map((review) => (
-          <ReviewCard review={review}></ReviewCard>
+          <tr>
+            <th>
+              <label>
+                <input type="checkbox" className="checkbox" />
+              </label>
+            </th>
+            <td>
+              <div className="flex items-center space-x-3">
+                <div className="avatar">
+                  <div className="mask mask-squircle w-12 h-12">
+                    <img
+                      src={review.reviewerImg}
+                      alt="Avatar Tailwind CSS Component"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <div className="font-bold">{review.reviewerName}</div>
+                  <div className="text-sm opacity-50">{review.reviewBy}</div>
+                </div>
+              </div>
+            </td>
+            <td>
+              {review.serviceTitle}
+              <br />
+              <span className="badge badge-ghost badge-sm">
+                {review.serviceId}
+              </span>
+            </td>
+            <td>{review.reviewMessage}</td>
+            <th>
+              <button className="btn btn-ghost btn-xs">details</button>
+            </th>
+          </tr>
         ))}
-      </div>
+      </tbody>
+      </table>
     </div>
   );
 };
 
 export default MyReviews;
+
