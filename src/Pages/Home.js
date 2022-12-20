@@ -3,7 +3,7 @@ import { Link, useLoaderData } from "react-router-dom";
 import img1 from "../assests/carousel/1.png";
 import img2 from "../assests/carousel/2.png";
 import img3 from "../assests/carousel/3.png";
-import DisplayReview from "./DisplayReview";
+import Reviews from "./Reviews";
 import ServiceCard from "./ServiceCard";
 const Home = () => {
     const reviews=useLoaderData()
@@ -62,11 +62,8 @@ const Home = () => {
       } <Link to={'/services'}><button > see more</button></Link>
       </div>
       </div>
-      <div className="grid grid-cols-3 gap-10">
-        {
-            reviews.map(review=><DisplayReview review={review} key={review._id}></DisplayReview>)
-        }
-      </div>
+      
+      <Reviews allReviews={reviews}></Reviews>
     </div>
   );
 };

@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const ServiceCard = ({ service }) => {
   const { title, img, price, description, Owner, rating ,_id} = service;
+  const [reviews,setReviews]=useState([])
+  useEffect(()=>{
+    fetch(``)
+    .then(res=>res.json())
+    .then(data=>setReviews(data))
+  },[])
+
   return (
     <div className="card lg:card-side bg-base-100 shadow-xl">
     <figure><img src={img} alt="Album"/></figure>

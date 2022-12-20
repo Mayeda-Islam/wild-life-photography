@@ -1,18 +1,31 @@
+import { getAuth, updateProfile } from 'firebase/auth';
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../AuthProvider/AuthProvider';
+import app from '../firebase/firebase.init';
 
+const auth=getAuth(app)
 const Signup = () => {
     const {SignUpWithEmail}=useContext(AuthContext)
   const handleSignUp = (e) => {
     e.preventDefault();
+    const displayName=e.target.name.value
+    const photoURL=e.target.photoUrl.value
     const email=e.target.email.value
     const password=e.target.password.value;
     console.log(email,password)
     SignUpWithEmail(email,password)
     .then(result=>{
-        const user=result.user
-        console.log(user)
+        // const user=result.user
+        updateProfile(auth.currentUser, {
+            displayName: displayName, photoURL: photoURL
+          }).then((result) => {
+            const user=result.user
+            console.log(user)
+          }).catch((error) => {
+            // An error occurred
+            // ...
+          });
     })
     .catch(error=>{
         console.log(error)
@@ -38,6 +51,18 @@ const Signup = () => {
                 type="text"
                 name="name"
                 placeholder="Your name"
+                className="input input-bordered"
+                required
+              />
+            </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Photo URL</span>
+              </label>
+              <input
+                type="text"
+                name="photoUrl"
+                placeholder="Photo URL"
                 className="input input-bordered"
                 required
               />
