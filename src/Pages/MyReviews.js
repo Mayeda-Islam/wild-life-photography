@@ -8,7 +8,7 @@ import ReviewCard from "./ReviewCard";
 const MyReviews = () => {
   const { user } = useContext(AuthContext);
   const [myReviews, setMyReviews] = useState([]);
-  const [selectedReview,setSelectedReview]=useState({})
+  const [selectedReview, setSelectedReview] = useState({});
 
   useEffect(() => {
     fetch(`http://localhost:5000/reviews?email=${user?.email}`)
@@ -25,7 +25,7 @@ const MyReviews = () => {
         .then((data) => {
           if (data.deletedCount > 0) {
             const remaining = myReviews.filter(
-              (reviews) => reviews._id!== reviewId
+              (reviews) => reviews._id !== reviewId
             );
             setMyReviews(remaining);
           }
@@ -39,11 +39,7 @@ const MyReviews = () => {
       <table className="table w-full">
         <thead>
           <tr>
-            <th>
-              <label>
-                <input type="checkbox" className="checkbox" />
-              </label>
-            </th>
+            <th></th>
             <th>Name</th>
             <th>Service</th>
             <th>Review</th>
@@ -79,17 +75,22 @@ const MyReviews = () => {
                 </div>
               </td>
               <td>
-                {review.serviceTitle}
-                <br />
-                <span className="badge badge-ghost badge-sm">
-                  {review.serviceId}
-                </span>
+                <div className="font-bold">{review.serviceTitle}</div>
+                <div className="badge badge-ghost badge-sm">{review._id}</div>
               </td>
-              <td>{review.reviewMessage}</td>
-              <td></td>
+              <td>
+                <div >{review.reviewMessage}</div>
+                <div className="badge badge-ghost badge-sm">
+                  {review.insertDate}
+                </div>
+              </td>
+              <td>{review.rating}</td>
               <td>
                 <label htmlFor="my-modal-6">
-                    <AiTwotoneEdit onClick={()=>setSelectedReview(review)} className="text-2xl "></AiTwotoneEdit>
+                  <AiTwotoneEdit
+                    onClick={() => setSelectedReview(review)}
+                    className="text-2xl "
+                  ></AiTwotoneEdit>
                 </label>
               </td>
             </tr>

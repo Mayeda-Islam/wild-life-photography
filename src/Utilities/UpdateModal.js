@@ -5,15 +5,15 @@ const UpdateModal = ({ selectedReview }) => {
   const handleUpdateReview = (e) => {
     const from = e.target;
     const name = from.name.value;
-    const rating = from.rating.value;
+    const reviewRating = from.rating.value;
     const message = from.reviewMessage.value;
-    console.log(name, rating, message);
+    console.log(name, reviewRating, message);
     const updateReview = {
       reviewerName: name,
-      rating: rating,
+      rating: reviewRating,
       reviewMessage: message,
     };
-    fetch(`http://localhost:5000/reviews/${selectedReview._id}`, {
+    fetch(`http://localhost:5000/reviews/${_id}`, {
       method: "PATCH",
       headers: {
         "content-type": "application/json",
@@ -53,7 +53,7 @@ const UpdateModal = ({ selectedReview }) => {
                       Service Name
                     </label>
                     <input
-                      name="reviewMessage"
+                      name="reviewTitle"
                       readOnly
                       disabled
                       defaultValue={serviceTitle}
@@ -62,11 +62,11 @@ const UpdateModal = ({ selectedReview }) => {
                     <label className="block text-start text-black text-sm font-bold mb-1">
                       Your Review
                     </label>
-                    <textarea
-                      name=""
+                    <input
+                      name="reviewMessage"
                       className="textarea textarea-bordered shadow appearance-none border rounded w-full py-2 px-1 text-black"
                       placeholder="Bio"
-                    ></textarea>
+                    ></input>
                     <label className="block text-start text-black text-sm font-bold mb-1">
                       Rating
                     </label>
@@ -75,25 +75,24 @@ const UpdateModal = ({ selectedReview }) => {
                       name="rating"
                       className="shadow appearance-none border rounded w-full py-2 px-1 text-black"
                     />
-                      <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
-                        <div>
-                          <label
-                            htmlFor="my-modal-6"
-                            className="text-red-500   background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1"
-                          >
-                            close
-                          </label>
-                        </div>
+                    <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
+                      <div>
+                        <label
+                          htmlFor="my-modal-6"
+                          className="text-red-500   background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1"
+                        >
+                          close
+                        </label>
+                      </div>
 
-                        <div className="modal-action">
-                          <label
-                            htmlFor="my-modal-6"
-                            className="text-white btn bg-yellow-500 active:bg-yellow-700 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
-                            type="submit"
-                          >
-                            Submit
-                          </label>
-                        </div>
+                      <div className="modal-action">
+                        <label
+                          htmlFor="my-modal-6"
+                          className="text-white btn bg-yellow-500 active:bg-yellow-700 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
+                        >
+                          <button type="submit"> Submit</button>
+                        </label>
+                      </div>
                     </div>
                   </form>
                 </div>
