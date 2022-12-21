@@ -35,7 +35,7 @@ const MyReviews = () => {
   };
 
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto "style={{height:"100vh"}}>
       <table className="table w-full">
         <thead>
           <tr>

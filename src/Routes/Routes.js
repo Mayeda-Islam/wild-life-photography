@@ -10,7 +10,7 @@ import Reviews from "../Pages/AddReviews";
 import Service from "../Pages/Service";
 import Services from "../Pages/Services";
 import Signup from "../Pages/Signup";
-import ServiceDetails from "./ServiceDetails";
+import ServiceDetails from "../Pages/ServiceDetails";
 import PrivateRoute from "./PrivateRoute";
 import MyReviews from "../Pages/MyReviews";
 
@@ -41,13 +41,6 @@ export const router = createBrowserRouter([
           return fetch(`http://localhost:5000/services/${params.id}`);
         },
       },
-    //   {
-    //     path: "/reviews/:id",
-    //     element: <Reviews></Reviews>,
-    //     loader: async ({ params }) => {
-    //       return fetch(`http://localhost:5000/reviews/${params.id}`);
-    //     },
-    //   },
       {
         path:'/myreviews',element:<MyReviews></MyReviews>
       },

@@ -3,13 +3,8 @@ import Rating from "react-rating";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import { FaStar } from "react-icons/fa";
 import Swal from "sweetalert2";
-import { useLoaderData } from "react-router-dom";
 
-const AddReviews = ({ serviceId, setRefetch ,title}) => {
-  const review = useLoaderData();
-  console.log(title);
-  const [serviceReview, setServiceReview] = useState(null);
-
+const AddReviews = ({ serviceId, setRefetch, title }) => {
   const [rating, setRating] = useState(null);
   const { user } = useContext(AuthContext);
   console.log(user);
@@ -26,8 +21,9 @@ const AddReviews = ({ serviceId, setRefetch ,title}) => {
       reviewerImg: user?.photoURL,
       reviewMessage: message,
       serviceId: serviceId,
-      serviceTitle:title
+      serviceTitle: title,
     };
+    // console.log(JSON.stringify(review))
     fetch(`http://localhost:5000/reviews`, {
       method: "POST",
       headers: {
@@ -40,11 +36,7 @@ const AddReviews = ({ serviceId, setRefetch ,title}) => {
         if (data.acknowledged) {
           form.reset();
           console.log(data);
-          // setReviews((preReviews) => [
-          //   ...preReviews,
-          //   { ...review, _id: data.insertedId },
-          // ]);
-          setRefetch(prevRefetch=>!prevRefetch)
+          setRefetch((prevRefetch) => !prevRefetch);
           Swal.fire({
             icon: "success",
             title: `review added successfully`,
@@ -52,7 +44,6 @@ const AddReviews = ({ serviceId, setRefetch ,title}) => {
             timer: 2500,
           });
         }
-        // setRe
       })
       .catch((error) => console.log(error));
   };

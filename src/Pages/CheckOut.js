@@ -1,10 +1,11 @@
 import React, { useContext } from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { Navigate, useLoaderData, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../AuthProvider/AuthProvider';
 
 const CheckOut = () => {
     const { _id, title, price } = useLoaderData();
   const { user } = useContext(AuthContext);
+  const navigate=useNavigate()
   const handlePlaceOrder = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -34,12 +35,13 @@ const CheckOut = () => {
       if(data.acknowledged){
         form.reset()
         alert('Placer order successfully')
+        navigate('/service')
       }
     })
     .catch(error=>console.log(error))
   };
   return (
-    <div>
+    <div style={{height:"100vh"}}>
       <form onSubmit={handlePlaceOrder}>
         <h2 className="text-5xl text-center">{title}</h2>
         <h4 className="text-center">Price:{price}</h4>

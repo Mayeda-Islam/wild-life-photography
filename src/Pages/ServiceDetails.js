@@ -2,8 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import { PhotoProvider, PhotoView } from "react-photo-view";
 import { Link, useLoaderData } from "react-router-dom";
 import { AuthContext } from "../AuthProvider/AuthProvider";
-import AddReviews from "../Pages/AddReviews";
-import Reviews from "../Pages/Reviews";
+import AddReviews from "./AddReviews";
+import Reviews from "./Reviews";
 
 const ServiceDetails = () => {
   const serviceDetails= useLoaderData();
@@ -16,7 +16,7 @@ const ServiceDetails = () => {
 const[refetch,setRefetch]=useState(false)
 
   useEffect(()=>{
-    fetch(`http://localhost:5000/reviews?serviceId=${_id}`)
+    fetch(`http://localhost:5000/reviews?serviceId=${_id}&sortBy=descending`)
     .then(res=>res.json())
     .then(data=>setReviews(data))
    },[_id,refetch])

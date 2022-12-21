@@ -6,17 +6,14 @@ import img3 from "../assests/carousel/3.png";
 import Reviews from "./Reviews";
 import ServiceCard from "./ServiceCard";
 const Home = () => {
-    const reviews=useLoaderData()
-    const [services,setServices]=useState([])
-    useEffect(()=>{
-     fetch(`http://localhost:5000/`)
-     .then(res=>res.json())
-     .then(data=>setServices(data))
-    },[])
+  const reviews = useLoaderData();
+  const [services, setServices] = useState([]);
+  useEffect(() => {
+    fetch(`http://localhost:5000/services?limit=${3}`)
+      .then((res) => res.json())
+      .then((data) => setServices(data));
+  }, []);
   return (
-
-   
-
     <div className="container mx-auto">
       {/* carousel */}
       <div className="carousel w-full">
@@ -56,13 +53,16 @@ const Home = () => {
         </div>
       </div>
       <div>
-      <div className="grid grid-cols-2">
-      {
-        services.map(service=><ServiceCard service={service} key={service._id}></ServiceCard>)
-      } <Link to={'/services'}><button > see more</button></Link>
+        <div className="grid grid-cols-2">
+          {services.map((service) => (
+            <ServiceCard service={service} key={service._id}></ServiceCard>
+          ))}{" "}
+          <Link to={"/services"}>
+            <button> see more</button>
+          </Link>
+        </div>
       </div>
-      </div>
-      
+
       <Reviews allReviews={reviews}></Reviews>
     </div>
   );
