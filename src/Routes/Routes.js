@@ -36,23 +36,35 @@ export const router = createBrowserRouter([
       { path: "/blogs", element: <Blogs></Blogs> },
       {
         path: "/services/:id",
-        element: <PrivateRoute><ServiceDetails></ServiceDetails></PrivateRoute>,
+        element: <ServiceDetails></ServiceDetails>,
         loader: async ({ params }) => {
           return fetch(`http://localhost:5000/services/${params.id}`);
         },
       },
       {
-        path:'/myreviews',element:<MyReviews></MyReviews>
+        path: "/myreviews",
+        element: <MyReviews></MyReviews>,
       },
 
       {
         path: "/checkout/:id",
-        element: <CheckOut></CheckOut>,
+        element: (
+          <PrivateRoute>  
+            <CheckOut></CheckOut>
+          </PrivateRoute>
+        ),
         loader: async ({ params }) => {
           return fetch(`http://localhost:5000/services/${params.id}`);
         },
       },
-      { path: "/service", element: <PrivateRoute><Service></Service></PrivateRoute> },
+      {
+        path: "/service",
+        element: (
+          <PrivateRoute>
+            <Service></Service>
+          </PrivateRoute>
+        ),
+      },
     ],
   },
 ]);

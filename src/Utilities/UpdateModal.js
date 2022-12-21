@@ -1,20 +1,21 @@
 import React, { useState } from "react";
 import { FaStar } from "react-icons/fa";
 import Rating from "react-rating";
+import Swal from "sweetalert2";
 
-const UpdateModal = ({ selectedReview }) => {
+const UpdateModal = ({ selectedReview, setMyReviews, myReviews }) => {
   const { serviceTitle, _id, reviewerName, reviewMessage, rating } =
     selectedReview;
   const [updatedRating, setUpdatedRating] = useState(rating);
   const handleUpdateReview = (e) => {
+    e.preventDefault();
     const from = e.target;
     const name = from.name.value;
-    const reviewRating = from.rating.value;
     const message = from.reviewMessage.value;
-    console.log(name, reviewRating, message);
+
     const updateReview = {
       reviewerName: name,
-      rating: reviewRating,
+      rating: updatedRating,
       reviewMessage: message,
     };
     fetch(`http://localhost:5000/reviews/${_id}`, {
@@ -26,7 +27,18 @@ const UpdateModal = ({ selectedReview }) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        if (data.modifiedCount > 0) {
+          const updatedReviews = [...myReviews];
+          const index = myReviews.map((review) => review._id).indexOf(_id);
+          updatedReviews.splice(index, 1, updateReview);
+          setMyReviews(updatedReviews);
+        }
+        Swal.fire({
+          icon: "success",
+          title: `review updated successfully`,
+          showConfirmButton: false,
+          timer: 2500,
+        });
       });
   };
   return (
@@ -77,17 +89,13 @@ const UpdateModal = ({ selectedReview }) => {
                       Rating
                     </label>
                     <Rating
-                      initialRating={rating}
+                      initialRating={updatedRating}
                       emptySymbol={<FaStar className="" />}
                       fullSymbol={<FaStar style={{ color: "goldenrod" }} />}
                       fractions={2}
                       onChange={(rate) => setUpdatedRating(rate)}
                     ></Rating>
-                    {/* <input
-                      name="rating"
-                      
-                      className="shadow appearance-none border rounded w-full py-2 px-1 text-black"
-                    /> */}
+
                     <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
                       <div>
                         <label
@@ -112,16 +120,6 @@ const UpdateModal = ({ selectedReview }) => {
               </div>
             </div>
           </div>
-
-          {/* <h3 className="font-bold text-lg">
-            Congratulations random Internet user!
-          </h3>
-          <p className="py-4">{selectedReview.reviewMessage}</p>
-          <div className="modal-action">
-            <label htmlFor="my-modal-6" className="btn">
-              Yay!
-            </label>
-          </div> */}
         </div>
       </div>
     </>

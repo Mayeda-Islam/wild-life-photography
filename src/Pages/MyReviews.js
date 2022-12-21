@@ -3,7 +3,6 @@ import { MdDeleteForever, MdRefresh } from "react-icons/md";
 import { AiTwotoneEdit } from "react-icons/ai";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import UpdateModal from "../Utilities/UpdateModal";
-import ReviewCard from "./ReviewCard";
 import Rating from "react-rating";
 import { FaStar } from "react-icons/fa";
 
@@ -107,7 +106,11 @@ const MyReviews = () => {
           ))}
         </tbody>
       </table>
-      <UpdateModal selectedReview={selectedReview}></UpdateModal>
+      <UpdateModal
+        myReviews={myReviews}
+        setMyReviews={setMyReviews}
+        selectedReview={selectedReview}
+      ></UpdateModal>
     </div>
   );
 };
