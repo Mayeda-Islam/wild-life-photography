@@ -1,7 +1,11 @@
 import React, { useState } from "react";
+import { FaStar } from "react-icons/fa";
+import Rating from "react-rating";
 
 const UpdateModal = ({ selectedReview }) => {
-  const { serviceTitle, _id } = selectedReview;
+  const { serviceTitle, _id, reviewerName, reviewMessage, rating } =
+    selectedReview;
+  const [updatedRating, setUpdatedRating] = useState(rating);
   const handleUpdateReview = (e) => {
     const from = e.target;
     const name = from.name.value;
@@ -45,6 +49,7 @@ const UpdateModal = ({ selectedReview }) => {
                       Full Name
                     </label>
                     <input
+                      defaultValue={reviewerName}
                       name="name"
                       className="shadow appearance-none border rounded w-full py-2 px-1 text-black"
                     />
@@ -64,17 +69,25 @@ const UpdateModal = ({ selectedReview }) => {
                     </label>
                     <input
                       name="reviewMessage"
+                      defaultValue={reviewMessage}
                       className="textarea textarea-bordered shadow appearance-none border rounded w-full py-2 px-1 text-black"
                       placeholder="Bio"
                     ></input>
                     <label className="block text-start text-black text-sm font-bold mb-1">
                       Rating
                     </label>
-
-                    <input
+                    <Rating
+                      initialRating={rating}
+                      emptySymbol={<FaStar className="" />}
+                      fullSymbol={<FaStar style={{ color: "goldenrod" }} />}
+                      fractions={2}
+                      onChange={(rate) => setUpdatedRating(rate)}
+                    ></Rating>
+                    {/* <input
                       name="rating"
+                      
                       className="shadow appearance-none border rounded w-full py-2 px-1 text-black"
-                    />
+                    /> */}
                     <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
                       <div>
                         <label

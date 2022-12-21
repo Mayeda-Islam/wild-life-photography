@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import {  MdDeleteForever, MdRefresh } from "react-icons/md";
+import { FaStar } from "react-icons/fa";
+import Rating from "react-rating";
 const ReviewCard = ({ review }) => {
   const {
     reviewerName,
@@ -8,9 +8,9 @@ const ReviewCard = ({ review }) => {
     reviewerImg,
     rating,
     reviewMessage,
-    insertDate
+    insertDate,
   } = review;
-  
+
   const dateTime = new Date(insertDate);
   const addedOn = dateTime.toLocaleString();
   return (
@@ -19,16 +19,20 @@ const ReviewCard = ({ review }) => {
         <div className="flex items-center my-4">
           <img className=" rounded-full h-12 w-12" src={reviewerImg} alt="" />
           <div className="text-start  mx-4">
-            
             <strong className="text-lg text-slate-500">{reviewerName}</strong>
             <h4 className="font-medium text-slate-400">{reviewBy}</h4>
           </div>
-          
         </div>
 
         <div className="text-start">
           <h3 className="font-semibold">Service : {serviceTitle}</h3>
-          <h3 className="font-semibold">Rating : {rating}</h3>
+          <Rating
+            initialRating={rating}
+            emptySymbol={<FaStar className="" />}
+            fullSymbol={<FaStar style={{ color: "goldenrod" }} />}
+            fractions={2}
+            readonly
+          ></Rating>
           <h3 className="font-semibold">Added On: {addedOn}</h3>
           <h3 className="font-semibold">Review : {reviewMessage}</h3>
         </div>
@@ -38,5 +42,3 @@ const ReviewCard = ({ review }) => {
 };
 
 export default ReviewCard;
-
-

@@ -4,6 +4,8 @@ import { AiTwotoneEdit } from "react-icons/ai";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import UpdateModal from "../Utilities/UpdateModal";
 import ReviewCard from "./ReviewCard";
+import Rating from "react-rating";
+import { FaStar } from "react-icons/fa";
 
 const MyReviews = () => {
   const { user } = useContext(AuthContext);
@@ -35,7 +37,7 @@ const MyReviews = () => {
   };
 
   return (
-    <div className="container mx-auto "style={{height:"100vh"}}>
+    <div className="container mx-auto " style={{ height: "100vh" }}>
       <table className="table w-full">
         <thead>
           <tr>
@@ -79,12 +81,20 @@ const MyReviews = () => {
                 <div className="badge badge-ghost badge-sm">{review._id}</div>
               </td>
               <td>
-                <div >{review.reviewMessage}</div>
+                <div>{review.reviewMessage}</div>
                 <div className="badge badge-ghost badge-sm">
-                  {review.insertDate}
+                  {new Date(review.insertDate).toLocaleString()}
                 </div>
               </td>
-              <td>{review.rating}</td>
+              <td>
+                <Rating
+                  initialRating={review.rating}
+                  emptySymbol={<FaStar className="" />}
+                  fullSymbol={<FaStar style={{ color: "goldenrod" }} />}
+                  fractions={2}
+                  readonly
+                ></Rating>
+              </td>
               <td>
                 <label htmlFor="my-modal-6">
                   <AiTwotoneEdit
