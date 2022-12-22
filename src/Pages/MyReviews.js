@@ -37,75 +37,82 @@ const MyReviews = () => {
 
   return (
     <div className="container mx-auto " style={{ height: "100vh" }}>
-      <table className="table w-full">
-        <thead>
-          <tr>
-            <th></th>
-            <th>Name</th>
-            <th>Service</th>
-            <th>Review</th>
-            <th>Rating</th>
-            <th>upgrade</th>
-          </tr>
-        </thead>
-        <tbody>
-          {myReviews.map((review) => (
+      {myReviews.length ? (
+        <table className="table w-full">
+          <thead>
             <tr>
-              <th>
-                <label>
-                  <MdDeleteForever
-                    onClick={() => handleReviewDelete(review._id)}
-                    className="text-2xl "
-                  ></MdDeleteForever>
-                </label>
-              </th>
-              <td>
-                <div className="flex items-center space-x-3">
-                  <div className="avatar">
-                    <div className="mask mask-squircle w-12 h-12">
-                      <img
-                        src={review.reviewerImg}
-                        alt="Avatar Tailwind CSS Component"
-                      />
+              <th></th>
+              <th>Name</th>
+              <th>Service</th>
+              <th>Review</th>
+              <th>Rating</th>
+              <th>upgrade</th>
+            </tr>
+          </thead>
+          <tbody>
+            {myReviews.map((review) => (
+              <tr>
+                <th>
+                  <label>
+                    <MdDeleteForever
+                      onClick={() => handleReviewDelete(review._id)}
+                      className="text-2xl "
+                    ></MdDeleteForever>
+                  </label>
+                </th>
+                <td>
+                  <div className="flex items-center space-x-3">
+                    <div className="avatar">
+                      <div className="mask mask-squircle w-12 h-12">
+                        <img
+                          src={review.reviewerImg}
+                          alt="Avatar Tailwind CSS Component"
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <div className="font-bold">{review.reviewerName}</div>
+                      <div className="text-sm opacity-50">
+                        {review.reviewBy}
+                      </div>
                     </div>
                   </div>
-                  <div>
-                    <div className="font-bold">{review.reviewerName}</div>
-                    <div className="text-sm opacity-50">{review.reviewBy}</div>
+                </td>
+                <td>
+                  <div className="font-bold">{review.serviceTitle}</div>
+                  <div className="badge badge-ghost badge-sm">{review._id}</div>
+                </td>
+                <td>
+                  <div>{review.reviewMessage}</div>
+                  <div className="badge badge-ghost badge-sm">
+                    {new Date(review.insertDate).toLocaleString()}
                   </div>
-                </div>
-              </td>
-              <td>
-                <div className="font-bold">{review.serviceTitle}</div>
-                <div className="badge badge-ghost badge-sm">{review._id}</div>
-              </td>
-              <td>
-                <div>{review.reviewMessage}</div>
-                <div className="badge badge-ghost badge-sm">
-                  {new Date(review.insertDate).toLocaleString()}
-                </div>
-              </td>
-              <td>
-                <Rating
-                  initialRating={review.rating}
-                  emptySymbol={<FaStar className="" />}
-                  fullSymbol={<FaStar style={{ color: "goldenrod" }} />}
-                  fractions={2}
-                  readonly
-                ></Rating>
-              </td>
-              <td>
-                <label htmlFor="my-modal-6">
-                  <AiTwotoneEdit
-                    onClick={() => setSelectedReview(review)}
-                    className="text-2xl "
-                  ></AiTwotoneEdit>
-                </label>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+                </td>
+                <td>
+                  <Rating
+                    initialRating={review.rating}
+                    emptySymbol={<FaStar className="" />}
+                    fullSymbol={<FaStar style={{ color: "goldenrod" }} />}
+                    fractions={2}
+                    readonly
+                  ></Rating>
+                </td>
+                <td>
+                  <label htmlFor="my-modal-6">
+                    <AiTwotoneEdit
+                      onClick={() => setSelectedReview(review)}
+                      className="text-2xl "
+                    ></AiTwotoneEdit>
+                  </label>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      ) : (
+        <h3 className="text-center mt-8">You have added no reviews</h3>
+      )}
+
       <UpdateModal
         myReviews={myReviews}
         setMyReviews={setMyReviews}

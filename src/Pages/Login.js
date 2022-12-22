@@ -16,8 +16,24 @@ const Login = () => {
     signInWithEmail(email, password)
       .then((result) => {
         const user = result.user;
-        navigate(from, { replace: true });
-        console.log(user);
+        const currentUser = {
+          email: user.email,
+        };
+        console.log(currentUser);
+        fetch(`http://localhost:5000/jwt`, {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(currentUser),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            localStorage.setItem("photo-Token", data.token);
+            navigate(from, { replace: true });
+            console.log(data.token,"in login page")
+          });
+        //
       })
       .catch((error) => console.log(error));
   };
@@ -26,7 +42,8 @@ const Login = () => {
     signInWithGoogle()
       .then((result) => {
         const user = result.user;
-        navigate(from, { replace: true });
+
+        // navigate(from, { replace: true });
         console.log(user);
         // ...
       })

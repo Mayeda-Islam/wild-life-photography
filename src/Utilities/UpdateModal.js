@@ -29,8 +29,12 @@ const UpdateModal = ({ selectedReview, setMyReviews, myReviews }) => {
       .then((data) => {
         if (data.modifiedCount > 0) {
           const updatedReviews = [...myReviews];
-          const index = myReviews.map((review) => review._id).indexOf(_id);
-          updatedReviews.splice(index, 1, updateReview);
+          const reviewIdArray = myReviews.map((review) => review._id); //["id", "id", "id"]
+          const reviewIndex = reviewIdArray.indexOf(_id); //id => index
+          updatedReviews.splice(reviewIndex, 1, {
+            ...selectedReview,
+            ...updateReview,
+          }); //modify item at specific position
           setMyReviews(updatedReviews);
         }
         Swal.fire({
@@ -48,14 +52,14 @@ const UpdateModal = ({ selectedReview, setMyReviews, myReviews }) => {
         <div className="modal-box h-full">
           <div className="flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
             <div className="relative w-auto my-6 mx-auto max-w-3xl">
-              <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
-                <div className="flex items-start justify-between p-5 border-b border-solid border-gray-300 rounded-t ">
+              <div className="border-0 rounded-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+                <div className="flex items-start justify-between p-5">
                   <h3 className="text-3xl font=semibold">Update Review</h3>
                 </div>
                 <div className="relative p-6 flex-auto">
                   <form
                     onSubmit={handleUpdateReview}
-                    className="bg-gray-200 shadow-md rounded px-8 pt-6 pb-8 w-full"
+                    className="px-2 pt-6 pb-8 w-full"
                   >
                     <label className="block text-start text-black text-sm font-bold mb-1">
                       Full Name
@@ -107,12 +111,12 @@ const UpdateModal = ({ selectedReview, setMyReviews, myReviews }) => {
                       </div>
 
                       <div className="modal-action">
-                        <label
-                          htmlFor="my-modal-6"
+                        <button
                           className="text-white btn bg-yellow-500 active:bg-yellow-700 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1"
+                          type="submit"
                         >
-                          <button type="submit"> Submit</button>
-                        </label>
+                          <label htmlFor="my-modal-6">Update now</label>
+                        </button>
                       </div>
                     </div>
                   </form>
