@@ -58,7 +58,7 @@ const ServiceDetails = () => {
           onSubmit={handlePlaceService}
           className="card lg:card-side lg:w-3/4  mx-auto bg-indigo-300 shadow-xl"
         >
-          <figure className="px-10 pt-10 mb-12">
+          <figure className="px-10 pt-10 mb-12 w-1/2">
             <PhotoProvider
               speed={() => 800}
               easing={(type) =>
@@ -77,7 +77,7 @@ const ServiceDetails = () => {
               </PhotoView>
             </PhotoProvider>
           </figure>
-          <div className="card-body items-start my-12 text-white">
+          <div className="card-body items-start my-12 w-1/2 text-white">
             <div className="card-title text-3xl">{title}</div>
             <div className="text-2xl font-medium">Captured By: {Owner}</div>
             <div className="text-2xl font-medium">Location : {location} </div>

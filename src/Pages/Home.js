@@ -64,7 +64,7 @@ const Home = () => {
             photography.Yo
           </p>
         </div>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-y-14 gap-x-16 bg-violet-300 py-12 px-8 rounded-lg">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-y-14 gap-x-12 py-12  rounded-lg">
           {services.map((service) => (
             <ServiceCard service={service} key={service._id}></ServiceCard>
           ))}{" "}
