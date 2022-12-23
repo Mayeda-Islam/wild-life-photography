@@ -14,7 +14,7 @@ const ServiceDetails = () => {
   const [refetch, setRefetch] = useState(false);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/reviews?serviceId=${_id}&sortBy=descending`)
+    fetch(`https://wild-life-photography-server-mu.vercel.app/reviews?serviceId=${_id}&sortBy=descending`)
       .then((res) => res.json())
       .then((data) => setReviews(data));
   }, [_id, refetch]);
@@ -33,7 +33,7 @@ const ServiceDetails = () => {
       description,
     };
     console.log(order);
-    fetch(`http://localhost:5000/service/${_id}`, {
+    fetch(`https://wild-life-photography-server-mu.vercel.app/service/${_id}`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

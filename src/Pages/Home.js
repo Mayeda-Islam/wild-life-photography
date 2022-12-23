@@ -9,12 +9,12 @@ const Home = () => {
   const reviews = useLoaderData();
   const [services, setServices] = useState([]);
   useEffect(() => {
-    fetch(`http://localhost:5000/services?limit=${3}`)
+    fetch(`https://wild-life-photography-server-mu.vercel.app/services?limit=${3}`)
       .then((res) => res.json())
       .then((data) => setServices(data));
   }, []);
   return (
-    <div className="container mx-auto">
+    <div className="container  mx-auto">
       {/* carousel */}
       <div className="carousel w-full">
         <div id="slide1" className="carousel-item relative w-full">

@@ -7,7 +7,7 @@ const Service = () => {
   const [orders, setOrders] = useState([]);
   console.log(orders);
   useEffect(() => {
-    fetch(`http://localhost:5000/orders?email=${user?.email}`, {
+    fetch(`https://wild-life-photography-server-mu.vercel.app/orders?email=${user?.email}`, {
       headers: {
         authorization: `Bearer ${localStorage.getItem("photo-Token")}`,
       },
@@ -25,7 +25,7 @@ const Service = () => {
   }, [user?.email]);
   const handleServiceDelete = (id) => {
     console.log("inside id", id);
-    fetch(`http://localhost:5000/orders/${id}`, {
+    fetch(`https://wild-life-photography-server-mu.vercel.app/orders/${id}`, {
       method: "DELETE",
     })
       .then((res) => res.json())
@@ -38,7 +38,7 @@ const Service = () => {
       });
   };
   const handleUpdate = (id) => {
-    fetch(`http://localhost:5000/orders/${id}`, {
+    fetch(`https://wild-life-photography-server-mu.vercel.app/orders/${id}`, {
       method: "PATCH",
       headers: {
         "content-type": "application/json",

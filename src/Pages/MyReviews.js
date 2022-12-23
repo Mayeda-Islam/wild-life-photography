@@ -12,14 +12,14 @@ const MyReviews = () => {
   const [selectedReview, setSelectedReview] = useState({});
 
   useEffect(() => {
-    fetch(`http://localhost:5000/reviews?email=${user?.email}`)
+    fetch(`https://wild-life-photography-server-mu.vercel.app/reviews?email=${user?.email}`)
       .then((res) => res.json())
       .then((data) => setMyReviews(data));
   }, [user?.email]);
   const handleReviewDelete = (reviewId) => {
     const proceed = window.confirm("Are your sure to delete?");
     if (proceed) {
-      fetch(`http://localhost:5000/reviews/${reviewId}`, {
+      fetch(`https://wild-life-photography-server-mu.vercel.app/reviews/${reviewId}`, {
         method: "DELETE",
       })
         .then((res) => res.json())

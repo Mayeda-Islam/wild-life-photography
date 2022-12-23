@@ -24,7 +24,7 @@ const AddReviews = ({ serviceId, setRefetch, title }) => {
       serviceTitle: title,
     };
     // console.log(JSON.stringify(review))
-    fetch(`http://localhost:5000/reviews`, {
+    fetch(`https://wild-life-photography-server-mu.vercel.app/reviews`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

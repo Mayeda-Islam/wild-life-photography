@@ -18,7 +18,7 @@ const UpdateModal = ({ selectedReview, setMyReviews, myReviews }) => {
       rating: updatedRating,
       reviewMessage: message,
     };
-    fetch(`http://localhost:5000/reviews/${_id}`, {
+    fetch(`https://wild-life-photography-server-mu.vercel.app/reviews/${_id}`, {
       method: "PATCH",
       headers: {
         "content-type": "application/json",
