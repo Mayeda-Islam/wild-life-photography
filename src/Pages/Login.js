@@ -1,8 +1,9 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 
 const Login = () => {
+  const [errMessage, setErrMessage] = useState("");
   const { user, signInWithEmail, signInWithGoogle } = useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
@@ -31,11 +32,13 @@ const Login = () => {
           .then((data) => {
             localStorage.setItem("photo-Token", data.token);
             navigate(from, { replace: true });
-            console.log(data.token,"in login page")
           });
         //
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        const errorMessage = error.message;
+        setErrMessage(errorMessage);
+      });
   };
   //   sign in with google
   const handleSignInWithGoogle = () => {
@@ -43,13 +46,12 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
 
-        // navigate(from, { replace: true });
-        console.log(user);
+        navigate(from, { replace: true });
         // ...
       })
       .catch((error) => {
         const errorMessage = error.message;
-        console.log(errorMessage);
+        setErrMessage(errorMessage);
       });
   };
   return (
@@ -84,10 +86,11 @@ const Login = () => {
                 placeholder="password"
                 className="input input-bordered"
               />
+              <label className="text-red-700 -ml-8">{errMessage}</label>
               <label className="label">
-                <a href="#" className="label-text-alt link link-hover">
+                <Link to={'/resetPassword'} className="label-text-alt link link-hover">
                   Forgot password?
-                </a>
+                </Link>
               </label>
             </div>
             <div className="form-control mt-6">

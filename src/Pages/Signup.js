@@ -40,16 +40,15 @@ const Signup = () => {
       });
   };
   return (
-    <div className="hero w-full my-20">
-      <div className="hero-content grid md:grid-cols-2 ">
-        <div className="text-center lg:text-left">
-          <img className="w-3/4" src="" pt-6 alt="" />
+    <div className="hero w-full my-10">
+      <div className="hero-content grid md:grid-cols-1 ">
+        <div className="text-center ">
+          <h1 className="text-5xl  text-center font-bold">Sign Up!</h1>
         </div>
         <form
           onSubmit={handleSignUp}
-          className="card mx-auto flex-shrink-0 w-full max-w-sm shadow-2xl py-20  bg-base-100"
+          className="card mx-auto flex-shrink-0 w-full max-w-sm shadow-2xl py-8  bg-base-100"
         >
-          <h1 className="text-5xl mt-5 text-center font-bold">Sign Up!</h1>
           <div className="card-body">
             <div className="form-control">
               <label className="label">

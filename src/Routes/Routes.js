@@ -13,6 +13,8 @@ import Signup from "../Pages/Signup";
 import ServiceDetails from "../Pages/ServiceDetails";
 import PrivateRoute from "./PrivateRoute";
 import MyReviews from "../Pages/MyReviews";
+import NotFound from "../Pages/NotFound";
+import ResetPassword from "../Utilities/ResetPassword";
 
 export const router = createBrowserRouter([
   {
@@ -65,6 +67,12 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+      {
+        path:'/resetPassword',element:<ResetPassword></ResetPassword>
+      },
+      {
+        path:"*",element:<NotFound></NotFound>
+      }
     ],
   },
 ]);

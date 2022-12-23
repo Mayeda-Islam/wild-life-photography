@@ -3,7 +3,7 @@ import { AuthContext } from "../AuthProvider/AuthProvider";
 import OrderList from "./OrderList";
 
 const Service = () => {
-  const { user,logOut  } = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
   const [orders, setOrders] = useState([]);
   console.log(orders);
   useEffect(() => {
@@ -13,10 +13,10 @@ const Service = () => {
       },
     })
       .then((res) => {
-        if(res.status===401 || res.status===403){
-          logOut()
+        if (res.status === 401 || res.status === 403) {
+          logOut();
         }
-        return res.json()
+        return res.json();
       })
       .then((data) => {
         setOrders(data);
@@ -58,32 +58,34 @@ const Service = () => {
   };
   return (
     <div style={{ height: "100vh" }}>
-      {orders.length === 0 ? (
-        <h1>You have nothing in service,Please add some service</h1>
-      ) : (
-        <div className="overflow-x-auto ">
-          <table className="table w-full">
-            <thead>
-              <tr>
-                <th></th>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Service name</th>
-                <th>status</th>
-              </tr>
-            </thead>
+      <div className="mt-12 container mx-auto">
+        {orders.length === 0 ? (
+          <h1 className="text-2xl font-bold">You have nothing in service.Please, add some service.</h1>
+        ) : (
+          <div className="overflow-x-auto ">
+            <table className="table w-full">
+              <thead>
+                <tr className="font-bold text-xl">
+                  <th></th>
+                  <th>Name</th>
+                  <th>Price</th>
+                  <th>Service name</th>
+                  <th>status</th>
+                </tr>
+              </thead>
 
-            {orders.map((order) => (
-              <OrderList
-                order={order}
-                handleUpdate={handleUpdate}
-                handleServiceDelete={handleServiceDelete}
-                key={order._id}
-              ></OrderList>
-            ))}
-          </table>
-        </div>
-      )}
+              {orders.map((order) => (
+                <OrderList
+                  order={order}
+                  handleUpdate={handleUpdate}
+                  handleServiceDelete={handleServiceDelete}
+                  key={order._id}
+                ></OrderList>
+              ))}
+            </table>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
