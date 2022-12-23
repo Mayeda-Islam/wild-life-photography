@@ -1,7 +1,7 @@
 # Wild Life Photography -Project
-### Live site link:[https://wild-life-photographer-c1735.web.app/services](https://wild-life-photographer-c1735.web.app/services)
+### Live site link:[https://wild-life-photographer-c1735.web.app/](https://wild-life-photographer-c1735.web.app/)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
 
 ## Project description:
 
@@ -24,6 +24,4 @@ Developed by:\
 Mayeda Islam\
  [https://github.com/Mayeda-Islam](https://github.com/Mayeda-Islam) 
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
