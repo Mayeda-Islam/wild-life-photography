@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
+import AOS from "aos";
+import "aos/dist/aos.css";
 const ServiceCard = ({ service }) => {
   const { title, img, price, description, Owner, rating, _id, location } =
     service;
@@ -11,9 +12,14 @@ const ServiceCard = ({ service }) => {
       .then((res) => res.json())
       .then((data) => setReviews(data));
   }, []);
-
+  useEffect(() => {
+    AOS.init();
+  }, []);
   return (
-    <div className="card  lg:card-side bg-base-200 shadow-xl">
+    <div
+      data-aos="fade-up"
+      className="card   lg:card-side bg-base-200 shadow-xl"
+    >
       <figure>
         <img src={img} alt="Album" />
       </figure>
@@ -28,11 +34,11 @@ const ServiceCard = ({ service }) => {
         <span className="text-md font-medium">Price :{price}$</span>
         <span className="text-md font-medium -mt-2">
           Description:
-          {description.length === 50
+          {description?.length === 50
             ? description
             : description.slice(0, 50) + "..."}
         </span>
-        
+
         <div className="card-actions  justify-end">
           <Link
             className="font-extrabold  text-violet-500"

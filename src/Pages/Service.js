@@ -7,11 +7,14 @@ const Service = () => {
   const [orders, setOrders] = useState([]);
   console.log(orders);
   useEffect(() => {
-    fetch(`https://wild-life-photography-server-mu.vercel.app/orders?email=${user?.email}`, {
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("photo-Token")}`,
-      },
-    })
+    fetch(
+      `https://wild-life-photography-server-mu.vercel.app/orders?email=${user?.email}`,
+      {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("photo-Token")}`,
+        },
+      }
+    )
       .then((res) => {
         if (res.status === 401 || res.status === 403) {
           logOut();
@@ -59,8 +62,10 @@ const Service = () => {
   return (
     <div style={{ height: "100vh" }}>
       <div className="mt-12 container mx-auto">
-        {orders.length === 0 ? (
-          <h1 className="text-2xl font-bold">You have nothing in service.Please, add some service.</h1>
+        {orders?.length === 0 ? (
+          <h1 className="text-2xl font-bold">
+            You have nothing in service.Please, add some service.
+          </h1>
         ) : (
           <div className="overflow-x-auto ">
             <table className="table w-full">
@@ -74,7 +79,7 @@ const Service = () => {
                 </tr>
               </thead>
 
-              {orders.map((order) => (
+              {orders?.map((order) => (
                 <OrderList
                   order={order}
                   handleUpdate={handleUpdate}

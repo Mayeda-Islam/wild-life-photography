@@ -13,14 +13,13 @@ const Login = () => {
     const form = e.target;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(email, password);
+
     signInWithEmail(email, password)
       .then((result) => {
         const user = result.user;
         const currentUser = {
           email: user.email,
         };
-        console.log(currentUser);
         fetch(`https://wild-life-photography-server-mu.vercel.app/jwt`, {
           method: "POST",
           headers: {
@@ -45,9 +44,21 @@ const Login = () => {
     signInWithGoogle()
       .then((result) => {
         const user = result.user;
-
-        navigate(from, { replace: true });
-        // ...
+        const currentUser = {
+          email: user.email,
+        };
+        fetch(`https://wild-life-photography-server-mu.vercel.app/jwt`, {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(currentUser),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            localStorage.setItem("photo-Token", data.token);
+            navigate(from, { replace: true });
+          });
       })
       .catch((error) => {
         const errorMessage = error.message;
@@ -88,7 +99,10 @@ const Login = () => {
               />
               <label className="text-red-700 -ml-8">{errMessage}</label>
               <label className="label">
-                <Link to={'/resetPassword'} className="label-text-alt link link-hover">
+                <Link
+                  to={"/resetPassword"}
+                  className="label-text-alt link link-hover"
+                >
                   Forgot password?
                 </Link>
               </label>
