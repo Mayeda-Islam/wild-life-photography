@@ -1,5 +1,4 @@
-import React, { Children, createContext, useEffect, useState } from "react";
-import App from "../App";
+import React, { createContext, useEffect, useState } from "react";
 import {
   createUserWithEmailAndPassword,
   getAuth,

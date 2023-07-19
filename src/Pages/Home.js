@@ -5,8 +5,13 @@ import img2 from "../assests/carousel/2.png";
 import img3 from "../assests/carousel/3.png";
 import Reviews from "./Reviews";
 import ServiceCard from "./ServiceCard";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
+import { Navigation } from "swiper";
 
 const Home = () => {
+  const images = [img1, img2, img3];
   const reviews = useLoaderData();
   const [services, setServices] = useState([]);
 
@@ -21,7 +26,14 @@ const Home = () => {
   return (
     <div className="">
       {/* carousel */}
-      <div className="carousel w-full">
+      <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
+        {images?.map((image, index) => (
+          <SwiperSlide key={index}>
+            <img src={image} alt="Images" className="w-full lg:h-[500px]" />
+          </SwiperSlide>
+        ))}
+      </Swiper>
+      {/* <div className="carousel w-full">
         <div id="slide1" className="carousel-item relative w-full">
           <img src={img3} className="w-full" alt="" />
           <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
@@ -74,7 +86,7 @@ const Home = () => {
             </a>
           </div>
         </div>
-      </div>
+      </div> */}
       <div className="mt-32 container mx-auto">
         <div className="w-80 lg:w-1/2 my-16 mx-auto">
           <h1 className="text-3xl font-extrabold text-slate-600">

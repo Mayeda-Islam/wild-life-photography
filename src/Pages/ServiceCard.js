@@ -5,7 +5,7 @@ import "aos/dist/aos.css";
 const ServiceCard = ({ service }) => {
   const { title, img, price, description, Owner, rating, _id, location } =
     service;
-  console.log(description);
+
   const [reviews, setReviews] = useState([]);
   useEffect(() => {
     fetch(``)
